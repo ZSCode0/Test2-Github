@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fullName": "Zahir Sidiqi",
+      "nickname": "Z",
+      "grade": 12,
+      "birthDay": 05/05/08,
+      "height": 5.8,
+      "weight": 154,
+
+
+      "bio": "High school student interested in coding and fitness.",
+
+      "githubUsername": "zahirsidiqi",
+      "codingYears": 2,
+
+      "mainHobby": "Boxing",
+      "secondaryHobby": "Gaming",
+      "favoriteMusic": "N/A",
+      "favoriteFood": "Burgers",
+      "favoriteShow": "LOTM",
+
+      "dreamCareer": "Software Engineer",
+      "biggestAchievement": "Built a full PHP website",
+      "codingHoursPerWeek": 5,
+      "favoriteTool": "ChatGpt",
+
+      "shortTermGoal": "Finish JobBridge",
+      "longTermGoal": "Work in tech",
+
+      "preferredWorkStyle": "Solo",
+      "favoriteColor": "Blue",
+      "lastUpdated": "2026-01-20",
+      "profileViews": 0
+    }
+  ]
+}
