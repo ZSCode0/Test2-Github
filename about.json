@@ -80,6 +80,33 @@
       "featuredLink": "https://www.dodge.com/charger.html",
       "lastUpdated": "2026-01-20",
       "statusMessage": "Planning future performance upgrades"
+    },
+    {
+      "id": "car4",
+      "firstName": "Barrett Johnson",
+      "lastName": "Johnson",
+      "nicktName": "Bear",
+      "Height": "6'0",
+      "weight": "141",
+      "School": "Grossmont High School",
+      "carBrand": "Dodge",
+      "carModel": "Charger SRT Hellcat",
+      "year": 2015,
+      "carType": "Sedan",
+      "engineType": "Supercharged 6.2L HEMI V8",
+      "horsepower": 707,
+      "drivetrain": "RWD",
+      "transmission": "8-speed automatic (ZF 8HP90)",
+      "modifications": ["Cold air intake", "Performance exhaust"],
+      "favoriteFeatures": ["Sport mode", "Touchscreen display"],
+      "topSpeedMph": 204,
+      "zeroToSixty": 3.7,
+      "fuelType": "Gasoline",
+      "color": "Black",
+      "dailyDriver": true,
+      "featuredLink": "https://www.dodge.com/charger.html",
+      "lastUpdated": "2026-01-20",
+      "statusMessage": "Planning future performance upgrades"
     }
   ]
 }
