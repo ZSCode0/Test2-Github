@@ -1,0 +1,106 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Page background */
+body {
+    background-color: #0f0f14;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main container */
+.profile-container {
+    background-color: #1b1b24;
+    width: 90%;
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Headings */
+.profile-container h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 2.2rem;
+    color: #ff3b3b;
+}
+
+.profile-container h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.profile-container h3 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #ff3b3b;
+    padding-bottom: 5px;
+}
+
+/* Paragraphs */
+.profile-container p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Lists */
+.profile-container ul {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.profile-container li {
+    background-color: #262635;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+/* Images */
+.car-image {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 15px auto;
+    border-radius: 10px;
+    border: 3px solid #ff3b3b;
+}
+
+/* Links */
+a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #ff3b3b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .profile-container {
+        padding: 20px;
+    }
+
+    .profile-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .profile-container h2 {
+        font-size: 1.5rem;
+    }
+}

@@ -1,18 +1,19 @@
 <?php
-$json = file_get_contents("about.json");
-$data = json_decode($json, true);
+// Load JSON file
+$jsonData = file_get_contents("about.json");
+$data = json_decode($jsonData, true);
 
-$me = null;
-
-// find only id = car2
-foreach ($data as $item) {
-    if ($item["id"] === "car2") {
-        $me = $item;
+// Find only id2
+$ranim = null;
+foreach ($data["cars"] as $person) {
+    if ($person["id"] === "id2") {
+        $ranim = $person;
         break;
     }
 }
 
-if (!$me) {
+// Stop page if id2 not found
+if (!$ranim) {
     die("Profile not found.");
 }
 ?>
@@ -21,60 +22,39 @@ if (!$me) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About Me</title>
-    <link rel="stylesheet" href="style.css">
+    <title>About Me - Ranim</title>
+    <link rel="stylesheet" href="Style.css">
 </head>
 <body>
 
-<div class="container">
+<div class="profile-container">
+    <h1>About Me</h1>
 
-    <div class="section">
-        <h1><?= $me["firstName"] . " " . $me["lastName"] ?> (<?= $me["nicktName"] ?>)</h1>
-        <p><strong>School:</strong> <?= $me["School"] ?></p>
-        <p><strong>Height:</strong> <?= $me["Height"] ?> | <strong>Weight:</strong> <?= $me["weight"] ?></p>
-        <p><strong>Status:</strong> <?= $me["statusMessage"] ?></p>
-    </div>
+    <h2><?php echo $ranim["firstName"] . " " . $ranim["lastName"]; ?></h2>
+    <p><strong>Nickname:</strong> <?php echo $ranim["nicktName"]; ?></p>
+    <p><strong>Height:</strong> <?php echo $ranim["Height"]; ?></p>
+    <p><strong>Weight:</strong> <?php echo $ranim["weight"]; ?></p>
+    <p><strong>School:</strong> <?php echo $ranim["School"]; ?></p>
 
-    <div class="section">
-        <h2>My Car</h2>
-        <img src="<?= $me["carImageURL"] ?>" alt="Car Image">
-        <p>
-            <?= $me["year"] ?> <?= $me["carBrand"] ?> <?= $me["carModel"] ?> (<?= $me["carType"] ?>)
-        </p>
-        <p>
-            <?= $me["engineType"] ?> • <?= $me["horsepower"] ?> HP • <?= $me["drivetrain"] ?>
-        </p>
-        <p>
-            0–60: <?= $me["zeroToSixty"] ?>s • Top Speed: <?= $me["topSpeedMph"] ?> mph
-        </p>
-    </div>
+    <h3>Status</h3>
+    <p><?php echo $ranim["statusMessage"]; ?></p>
 
-    <div class="section">
-        <h2>Modifications</h2>
-        <?php foreach ($me["modifications"] as $mod): ?>
-            <span class="tag"><?= $mod ?></span>
-        <?php endforeach; ?>
-    </div>
+    <h3>Car Info</h3>
+    <ul>
+        <li><strong>Car:</strong> <?php echo $ranim["year"] . " " . $ranim["carBrand"] . " " . $ranim["carModel"]; ?></li>
+        <li><strong>Engine:</strong> <?php echo $ranim["engineType"]; ?></li>
+        <li><strong>Horsepower:</strong> <?php echo $ranim["horsepower"]; ?> HP</li>
+        <li><strong>Drivetrain:</strong> <?php echo $ranim["drivetrain"]; ?></li>
+        <li><strong>0–60:</strong> <?php echo $ranim["zeroToSixty"]; ?> sec</li>
+        <li><strong>Top Speed:</strong> <?php echo $ranim["topSpeedMph"]; ?> mph</li>
+        <li><strong>Color:</strong> <?php echo $ranim["color"]; ?></li>
+    </ul>
 
-    <div class="section">
-        <h2>Favorite Features</h2>
-        <ul>
-            <?php foreach ($me["favoriteFeatures"] as $feature): ?>
-                <li><?= $feature ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+    <img src="<?php echo $ranim["carImageURL"]; ?>" alt="Car Image" class="car-image">
 
-    <div class="section">
-        <h2>Dream Car</h2>
-        <p><?= ucfirst($me["dreamCar"]) ?></p>
-        <img src="<?= $me["dreamCarImageURL"] ?>" alt="Dream Car">
-        <p>
-            <a href="<?= $me["featuredLink"] ?>" target="_blank">Official Page</a>
-        </p>
-    </div>
-
-    <p><em>Last updated: <?= $me["lastUpdated"] ?></em></p>
+    <h3>Dream Car</h3>
+    <p><?php echo ucfirst($ranim["dreamCar"]); ?></p>
+    <img src="<?php echo $ranim["dreamCarImageURL"]; ?>" alt="Dream Car" class="car-image">
 
 </div>
 
