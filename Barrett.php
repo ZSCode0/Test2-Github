@@ -25,26 +25,7 @@ if (file_exists($jsonFile)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barrett's Profile</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        h1 { color: #d32f2f; border-bottom: 2px solid #d32f2f; padding-bottom: 10px; }
-        .profile-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .profile-info h2 { margin: 0; }
-        .profile-info p { margin: 5px 0; color: #666; }
-
-        .car-section { margin-top: 30px; }
-        .car-title { font-size: 1.5em; font-weight: bold; color: #333; margin-bottom: 10px; }
-
-        .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
-        .spec-item { background: #f9f9f9; padding: 10px; border-radius: 5px; border-left: 4px solid #d32f2f; }
-        .spec-label { font-weight: bold; display: block; font-size: 0.9em; color: #555; }
-
-        .image-container { margin-top: 20px; }
-        .image-container img { max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-
-        .tag { display: inline-block; background: #333; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.8em; margin-right: 5px; }
-    </style>
+     <link rel="stylesheet" href="Style.css">
 </head>
 <body>
 
