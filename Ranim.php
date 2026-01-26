@@ -1,11 +1,28 @@
 <?php
-// Load JSON file
-$json = file_get_contents("about.json");
-$data = json_decode($json, true);
+header("Cache-Control: no-cache, no-store, must-revalidate");
 
-// Safety check
-if (!$data) {
+$json = file_get_contents("about.json");
+$jsonData = json_decode($json, true);
+
+if (!$jsonData || !isset($jsonData["cars"])) {
   die("Profile data not found.");
+}
+
+$carId = isset($_GET["id"]) ? $_GET["id"] : null;
+
+if ($carId) {
+  $data = null;
+  foreach ($jsonData["cars"] as $car) {
+    if ($car["id"] === $carId) {
+      $data = $car;
+      break;
+    }
+  }
+  if (!$data) {
+    die("Car profile not found.");
+  }
+} else {
+  $data = $jsonData["cars"][1];
 }
 ?>
 
@@ -13,7 +30,8 @@ if (!$data) {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Profile | <?= $data["firstName"]; ?></title>
+  <title>Profile | <?= htmlspecialchars($data["firstName"]); ?></title>
+  <link rel="stylesheet" href="Stlye.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -44,63 +62,81 @@ if (!$data) {
       margin-top: 10px;
     }
     .status { font-style: italic; color: #555; }
+    .nav-links {
+      margin-bottom: 20px;
+    }
+    .nav-links a {
+      margin-right: 15px;
+      color: #c1121f;
+      text-decoration: none;
+    }
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
 
-  <!-- Personal Info -->
-  <div class="card">
-    <h2>Personal Profile</h2>
-    <p><strong>Name:</strong> <?= $data["firstName"] . " " . $data["lastName"]; ?></p>
-    <p><strong>Nickname:</strong> <?= $data["nicktName"]; ?></p>
-    <p><strong>Height:</strong> <?= $data["Height"]; ?></p>
-    <p><strong>Weight:</strong> <?= $data["weight"]; ?></p>
-    <p><strong>School:</strong> <?= $data["School"]; ?></p>
+  <div class="nav-links">
+    <?php foreach ($jsonData["cars"] as $car): ?>
+      <a href="?id=<?= htmlspecialchars($car["id"]); ?>"><?= htmlspecialchars($car["firstName"]); ?>'s Car</a>
+    <?php endforeach; ?>
   </div>
 
-  <!-- Car Info -->
+  <div class="card">
+    <h2>Personal Profile</h2>
+    <p><strong>Name:</strong> <?= htmlspecialchars($data["firstName"] . " " . $data["lastName"]); ?></p>
+    <p><strong>Nickname:</strong> <?= htmlspecialchars($data["nicktName"] ?? $data["nickname"] ?? "N/A"); ?></p>
+    <p><strong>Height:</strong> <?= htmlspecialchars($data["Height"] ?? $data["height"] ?? "N/A"); ?></p>
+    <p><strong>Weight:</strong> <?= htmlspecialchars($data["weight"]); ?></p>
+    <p><strong>School:</strong> <?= htmlspecialchars($data["School"] ?? $data["school"] ?? "N/A"); ?></p>
+  </div>
+
   <div class="card">
     <h2>Car Profile</h2>
-    <p><strong>Car:</strong> <?= $data["year"] . " " . $data["carBrand"] . " " . $data["carModel"]; ?></p>
-    <p><strong>Type:</strong> <?= $data["carType"]; ?></p>
-    <p><strong>Color:</strong> <?= $data["color"]; ?></p>
-    <p><strong>Engine:</strong> <?= $data["engineType"]; ?></p>
-    <p><strong>Horsepower:</strong> <?= $data["horsepower"]; ?> HP</p>
-    <p><strong>Drivetrain:</strong> <?= $data["drivetrain"]; ?></p>
-    <p><strong>Transmission:</strong> <?= $data["transmission"]; ?></p>
-    <p><strong>0–60 mph:</strong> <?= $data["zeroToSixty"]; ?> sec</p>
-    <p><strong>Top Speed:</strong> <?= $data["topSpeedMph"]; ?> mph</p>
-    <p><strong>Fuel:</strong> <?= $data["fuelType"]; ?></p>
+    <p><strong>Car:</strong> <?= htmlspecialchars($data["year"] . " " . $data["carBrand"] . " " . $data["carModel"]); ?></p>
+    <p><strong>Type:</strong> <?= htmlspecialchars($data["carType"]); ?></p>
+    <p><strong>Color:</strong> <?= htmlspecialchars($data["color"]); ?></p>
+    <p><strong>Engine:</strong> <?= htmlspecialchars($data["engineType"]); ?></p>
+    <p><strong>Horsepower:</strong> <?= htmlspecialchars($data["horsepower"]); ?> HP</p>
+    <p><strong>Drivetrain:</strong> <?= htmlspecialchars($data["drivetrain"]); ?></p>
+    <p><strong>Transmission:</strong> <?= htmlspecialchars($data["transmission"]); ?></p>
+    <p><strong>0–60 mph:</strong> <?= htmlspecialchars($data["zeroToSixty"]); ?> sec</p>
+    <p><strong>Top Speed:</strong> <?= htmlspecialchars($data["topSpeedMph"]); ?> mph</p>
+    <p><strong>Fuel:</strong> <?= htmlspecialchars($data["fuelType"]); ?></p>
     <p><strong>Daily Driver:</strong> <?= $data["dailyDriver"] ? "Yes" : "No"; ?></p>
   </div>
 
-  <!-- Mods -->
   <div class="card">
     <h2>Mods & Features</h2>
 
     <h3>Modifications</h3>
     <ul>
       <?php foreach ($data["modifications"] as $mod): ?>
-        <li><?= $mod; ?></li>
+        <li><?= htmlspecialchars($mod); ?></li>
       <?php endforeach; ?>
     </ul>
 
     <h3>Favorite Features</h3>
     <ul>
       <?php foreach ($data["favoriteFeatures"] as $feature): ?>
-        <li><?= $feature; ?></li>
+        <li><?= htmlspecialchars($feature); ?></li>
       <?php endforeach; ?>
     </ul>
 
-    <p class="status">“<?= $data["statusMessage"]; ?>”</p>
+    <?php if (!empty($data["statusMessage"])): ?>
+      <p class="status">"<?= htmlspecialchars($data["statusMessage"]); ?>"</p>
+    <?php endif; ?>
 
-    <a class="btn" href="<?= $data["featuredLink"]; ?>" target="_blank">
-      Official Supra Page
-    </a>
+    <?php if (!empty($data["featuredLink"])): ?>
+      <a class="btn" href="<?= htmlspecialchars($data["featuredLink"]); ?>" target="_blank">
+        Official Car Page
+      </a>
+    <?php endif; ?>
 
-    <p><small>Last updated: <?= $data["lastUpdated"]; ?></small></p>
+    <p><small>Last updated: <?= htmlspecialchars($data["lastUpdated"]); ?></small></p>
   </div>
 
 </div>
