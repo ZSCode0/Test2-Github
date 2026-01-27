@@ -23,10 +23,9 @@ $students = loadStudentData()['cars'];
             <img src="<?= escape($student['carImageURL']) ?>" alt="<?= escape($student['carBrand'] . ' ' . $student['carModel']) ?>" width="200">
             <p><strong>School:</strong> <?= escape($student['school'] ?? $student['School']) ?></p>
             <p><strong>Dream Car:</strong> <?= escape($student['dreamCar']) ?></p>
-            <a href="<?= escape($student['id']) ?>.php" class="btn">View Profile</a>
+            <a href="pages/<?= escape($student['id']) ?>.php" class="btn">View Profile</a>
         </div>
         <?php endforeach; ?>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
