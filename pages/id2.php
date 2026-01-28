@@ -1,62 +1,78 @@
 <?php
-// Load JSON file
-$jsonData = file_get_contents("about.json");
-$data = json_decode($jsonData, true);
+require __DIR__ . '/../functions.php';
 
-// Find only id2
-$ranim = null;
-foreach ($data["cars"] as $person) {
-    if ($person["id"] === "id2") {
-        $ranim = $person;
-        break;
-    }
-}
+// Get student with id2
+$student = getStudentById('id2');
 
-// Stop page if id2 not found
-if (!$ranim) {
-    die("Profile not found.");
+if (!$student) {
+    echo "Student not found!";
+    exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About Me - Ranim</title>
-    <link rel="stylesheet" href="Style.css">
+    <title>All About Me</title>
+     <link rel="stylesheet" href="../Style.css">
 </head>
 <body>
+    <div class="navbar">
+        <a href="../index.php">Home</a>
+    </div>
 
-<div class="profile-container">
-    <h1>About Me</h1>
+    <div class="container">
+        <div class="card student-info">
+            <h2><?php echo escape($student['firstName'] . " " . $student['lastName']); ?> (<?php echo escape($student['nicktName']); ?>)</h2>
+            <p><strong>Height:</strong> <?php echo escape($student['Height']); ?></p>
+            <p><strong>Weight:</strong> <?php echo escape($student['weight']); ?></p>
+            <p><strong>School:</strong> <?php echo escape($student['School']); ?></p>
+            <p><strong>Status:</strong> <?php echo escape($student['statusMessage']); ?></p>
+            <p><strong>Favorite Features:</strong> <?php echo escape(implode(", ", $student['favoriteFeatures'])); ?></p>
 
-    <h2><?php echo $ranim["firstName"] . " " . $ranim["lastName"]; ?></h2>
-    <p><strong>Nickname:</strong> <?php echo $ranim["nicktName"]; ?></p>
-    <p><strong>Height:</strong> <?php echo $ranim["Height"]; ?></p>
-    <p><strong>Weight:</strong> <?php echo $ranim["weight"]; ?></p>
-    <p><strong>School:</strong> <?php echo $ranim["School"]; ?></p>
 
-    <h3>Status</h3>
-    <p><?php echo $ranim["statusMessage"]; ?></p>
+        </div>
+       
+        <div class="card car-specs">
+            <h3>My Car</h3>
+            <img src="<?php echo escape($student['carImageURL']); ?>" alt="My Car" style="width:100%; max-width:500px; border-radius:5px;">
+            <p><strong>Brand:</strong> <?php echo escape($student['carBrand']); ?></p>
+            <p><strong>Model:</strong> <?php echo escape($student['carModel']); ?></p>
+            <p><strong>Year:</strong> <?php echo escape($student['year']); ?></p>
+            <p><strong>Type:</strong> <?php echo escape($student['carType']); ?></p>
+            <p><strong>Engine:</strong> <?php echo escape($student['engineType']); ?></p>
+            <p><strong>Horsepower:</strong> <?php echo escape($student['horsepower']); ?> HP</p>
+            <p><strong>Drivetrain:</strong> <?php echo escape($student['drivetrain']); ?></p>
+            <p><strong>Transmission:</strong> <?php echo escape($student['transmission']); ?></p>
+            <p><strong>Color:</strong> <?php echo escape($student['color']); ?></p>
+            <p><strong>Fuel Type:</strong> <?php echo escape($student['fuelType']); ?></p>
+        </div>
 
-    <h3>Car Info</h3>
-    <ul>
-        <li><strong>Car:</strong> <?php echo $ranim["year"] . " " . $ranim["carBrand"] . " " . $ranim["carModel"]; ?></li>
-        <li><strong>Engine:</strong> <?php echo $ranim["engineType"]; ?></li>
-        <li><strong>Horsepower:</strong> <?php echo $ranim["horsepower"]; ?> HP</li>
-        <li><strong>Drivetrain:</strong> <?php echo $ranim["drivetrain"]; ?></li>
-        <li><strong>0–60:</strong> <?php echo $ranim["zeroToSixty"]; ?> sec</li>
-        <li><strong>Top Speed:</strong> <?php echo $ranim["topSpeedMph"]; ?> mph</li>
-        <li><strong>Color:</strong> <?php echo $ranim["color"]; ?></li>
-    </ul>
+        <div class="card performance-upgrades">
+            <h3>Modifications</h3>
+            <ul>
+                <?php foreach ($student['modifications'] as $mod): ?>
+                    <li><?php echo escape($mod); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <h3>Favorite Features</h3>
+            <ul>
+                <?php foreach ($student['favoriteFeatures'] as $feature): ?>
+                    <li><?php echo escape($feature); ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
 
-    <img src="<?php echo $ranim["carImageURL"]; ?>" alt="Car Image" class="car-image">
+        <div class="card car-specs">
+            <h3>Performance</h3>
+            <p><strong>Top Speed:</strong> <?php echo escape($student['topSpeedMph']); ?> MPH</p>
+            <p><strong>0-60:</strong> <?php echo escape($student['zeroToSixty']); ?> seconds</p>
+            <p><strong>Daily Driver:</strong> <?php echo $student['dailyDriver'] ? 'Yes' : 'No'; ?></p>
+            <p><strong>Dream Car:</strong> <?php echo escape($student['dreamCar']); ?></p>
+            <img src="<?php echo escape($student['dreamCarImageURL']); ?>" alt="Dream Car" style="width:100%; max-width:500px; border-radius:5px;">
+           
+        </div>
 
-    <h3>Dream Car</h3>
-    <p><?php echo ucfirst($ranim["dreamCar"]); ?></p>
-    <img src="<?php echo $ranim["dreamCarImageURL"]; ?>" alt="Dream Car" class="car-image">
-
-</div>
-
+    </div>
 </body>
 </html>

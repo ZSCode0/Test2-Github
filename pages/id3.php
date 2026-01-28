@@ -38,6 +38,8 @@ if (file_exists($jsonFile)) {
                 <p><strong>Nickname:</strong> <?php echo htmlspecialchars($personData['nicktName']); ?></p>
                 <p><strong>School:</strong> <?php echo htmlspecialchars($personData['School']); ?></p>
                 <p><strong>Height:</strong> <?php echo htmlspecialchars($personData['Height']); ?> | <strong>Weight:</strong> <?php echo htmlspecialchars($personData['weight']); ?> lbs</p>
+                 <p><strong>Favorite Features:</strong> <?php echo escape(implode(", ", $student['favoriteFeatures'])); ?></p>
+
             </div>
         </div>
 

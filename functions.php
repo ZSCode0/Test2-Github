@@ -18,4 +18,13 @@ function getStudentById($id) {
 function escape($value) {
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
+// Ranim's custom function
+function ranim_render_features($student) {
+    if (empty($student['favoriteFeatures'])) {
+        return "No favorite features listed.";
+    }
+    // Return a comma-separated list
+    return "Favorite Features: " . implode(", ", $student['favoriteFeatures']);
+}
+
 ?>

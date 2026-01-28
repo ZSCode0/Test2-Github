@@ -19,6 +19,8 @@ $student = getStudentById('id1');
             <h3>Car Details</h3>
             <p><strong>Model:</strong> <?= escape($student['carModel']) ?></p>
             <p><strong>Horsepower:</strong> <?= escape($student['horsepower']) ?></p>
+             <p><strong>Favorite Features:</strong> <?php echo escape(implode(", ", $student['favoriteFeatures'])); ?></p>
+
             </div>
     </div>
 </body>
